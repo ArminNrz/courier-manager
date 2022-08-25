@@ -1,0 +1,49 @@
+server:
+  port: 6711
+
+spring:
+  web:
+    resources:
+      add-mappings: false
+  application:
+    name: courier-manager
+  data:
+    mongodb:
+      host: ${COURIER_DB_HOST}
+      port: ${COURIER_DB_PORT}
+      database: ${COURIER_DB}
+      username: ${COURIER_DB_USERNAME}
+      password: ${COURIER_DB_PASSWORD}
+      authentication-database: admin
+      auto-index-creation: true
+
+mongock:
+  migration-scan-package: ir.ronad.courierManager.migration
+  enabled: true
+
+logging:
+  level:
+      ir:
+        ronad: debug
+
+ronad:
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: MzZmYjdhMzRlZmJlMzcxMjViZDAxM2RlYzc4OTJkMTM0NWFmYWNhNzRlMzdiNDVjYjM4M2YwNmY1MDI3NmU0NmY4YjEwMzFiMGNiMDUxYTA2ODQ4YjM2OGM3OTM0MWRiNWRkMDdmNmRmZmY5M2QyYTY1ZjhjMGE3NjU1Y2Q4ZTU=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+    cors:
+      allowed-origin-patterns: "*"
+      allowed-methods: '*'
+      allowed-headers: '*'
+      exposed-headers: 'Authorization,Link,X-Total-Count'
+      allow-credentials: true
+      max-age: 1800
+  courier:
+    link-express:
+      url: http://api.linkexpress.ir/v1
+      username: ronadtest
+      password: ronad684
