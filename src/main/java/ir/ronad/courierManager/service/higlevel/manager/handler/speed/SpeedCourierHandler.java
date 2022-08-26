@@ -15,4 +15,9 @@ public class SpeedCourierHandler extends BaseCourierHandler {
     public DeliveryResponse createOrder(TplOrderEntity tplOrderEntity) {
         return null;
     }
+
+    @Override
+    public DeliveryResponse getOrder(TplOrderEntity tplOrderEntity) {
+        return null;
+    }
 }

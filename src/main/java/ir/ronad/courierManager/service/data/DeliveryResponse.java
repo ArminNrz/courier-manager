@@ -17,4 +17,5 @@ public class DeliveryResponse implements Serializable {
     private TplOrderStatus status;
     private BaseExtraInfo extraInfo;
     private NotificationType notificationType;
+    private TplOrderStatus lastTplOrderStatus;
 }

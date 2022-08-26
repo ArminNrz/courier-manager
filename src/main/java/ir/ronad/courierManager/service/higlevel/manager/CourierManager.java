@@ -56,4 +56,10 @@ public class CourierManager {
         BaseCourierHandler baseCourierHandler = this.getCourierHandler(tplOrder.getTplCode());
         return baseCourierHandler.createOrder(tplOrder);
     }
+
+    public DeliveryResponse getOrder(TplOrderEntity tplOrder) {
+        log.trace("Enter: courierManager.getOrder({})", tplOrder);
+        BaseCourierHandler baseCourierHandler = this.getCourierHandler(tplOrder.getTplCode());
+        return baseCourierHandler.getOrder(tplOrder);
+    }
 }

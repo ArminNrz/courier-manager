@@ -66,6 +66,13 @@ public class TplOrderService {
                 .findFirst();
     }
 
+    public List<TplOrderEntity> getByOrderId(Long orderId) {
+        log.trace("Enter: tplOrderService.getByOrderId(orderId: {})", orderId);
+        return repository.findAllByOrderId(orderId).stream()
+                .peek(tplOrder -> log.trace("Found tplOrderId: {}, with orderId: {}", tplOrder.getId(), tplOrder.getOrderId()))
+                .collect(Collectors.toList());
+    }
+
     public TplOrderDTO update(TplOrderUpdateRequestDTO updateRequestDTO) {
         log.trace("Enter: tplOrderService.update({})", updateRequestDTO);
 
@@ -79,7 +86,7 @@ public class TplOrderService {
         return mapper.toDTO(updatedEntity);
     }
 
-    public DeliveryResponse updateStatus(DeliveryResponse deliveryResponse) {
+    public void updateStatus(DeliveryResponse deliveryResponse) {
         log.trace("Enter: tplOrderService.updateStatus(deliveryResponse: {}", deliveryResponse);
 
         TplOrderEntity entity = deliveryResponse.getTplOrderEntity();
@@ -95,15 +102,12 @@ public class TplOrderService {
         entity = logHandler.saveLog(logData);
         repository.save(entity);
         log.debug("Updated TplOrder with id: {}, from status: {}, to status: {}", entity.getId(), lastStatus, entity.getStatus());
-        return deliveryResponse;
     }
 
-    public DeliveryResponse updateByDeliveryResponse(DeliveryResponse deliveryResponse) {
+    public void updateByDeliveryResponse(DeliveryResponse deliveryResponse) {
         log.trace("Enter: tplOrderService.updateByDeliveryResponse(deliveryResponse: {}", deliveryResponse);
-
         TplOrderEntity updatedEntity = mapper.fromDeliveryResponse(deliveryResponse, deliveryResponse.getTplOrderEntity());
         repository.save(updatedEntity);
         deliveryResponse.setTplOrderEntity(updatedEntity);
-        return deliveryResponse;
     }
 }

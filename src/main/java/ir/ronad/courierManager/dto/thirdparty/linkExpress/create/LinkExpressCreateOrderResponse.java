@@ -1,6 +1,5 @@
-package ir.ronad.courierManager.dto.thirdparty.linkExpress;
+package ir.ronad.courierManager.dto.thirdparty.linkExpress.create;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.ronad.courierManager.dto.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +13,5 @@ import lombok.NoArgsConstructor;
 public class LinkExpressCreateOrderResponse extends BaseDTO {
     private String message;
     private String code;
-    @JsonProperty("tracking_code")
-    private String trackingCode;
+    private String tracking_code;
 }
