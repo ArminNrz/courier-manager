@@ -16,6 +16,19 @@ spring:
       password: ${COURIER_DB_PASSWORD}
       authentication-database: admin
       auto-index-creation: true
+  kafka:
+    bootstrap-servers: ${ronad.kafka.bootstrap-servers}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      compression-type: snappy
+    consumer:
+      group-id: 3pl-management
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "ir.ronad.*"
 
 mongock:
   migration-scan-package: ir.ronad.courierManager.migration
@@ -42,6 +55,12 @@ ronad:
       exposed-headers: 'Authorization,Link,X-Total-Count'
       allow-credentials: true
       max-age: 1800
+  kafka:
+    bootstrap-servers: ${RONAD_KAFKA_HOST}:${RONAD_KAFKA_PORT:9092}
+    events:
+      3pl-order:
+        topic: event_3pl_order
+        partitions: 2
   courier:
     link-express:
       url: http://api.linkexpress.ir/v1
