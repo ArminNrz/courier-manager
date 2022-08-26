@@ -20,7 +20,7 @@ public class TplOrderLogHandler {
     public TplOrderEntity saveLog(TplOrderLogData logData) {
         log.trace("Enter: tplOrderLogHandler.saveLog({})", logData);
         TplOrderLogEntity logEntity = mapper.fromLogData(logData);
-        repository.insert(logEntity);
+        repository.save(logEntity);
         logData.getEntity().getTplOrderLogs().add(logEntity);
         log.trace("Exit: tplOrderLogHandler.saveLog, result: {}", logData.getEntity());
         return logData.getEntity();

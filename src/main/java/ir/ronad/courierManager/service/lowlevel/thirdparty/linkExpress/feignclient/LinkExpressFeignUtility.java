@@ -29,7 +29,7 @@ public class LinkExpressFeignUtility {
                 .encoder(new JacksonEncoder())
                 .decoder(new GsonDecoder())
                 .logger(new Slf4jLogger(LinkExpressFeignUtility.class))
-                .logLevel(Logger.Level.BASIC)
+                .logLevel(Logger.Level.FULL)
                 .requestInterceptor(interceptor)
                 .errorDecoder(errorDecoder)
                 .target(LinkExpressFeignClient.class, url);

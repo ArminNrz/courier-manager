@@ -13,6 +13,7 @@ public class ErrorMessages {
         String TPL_ORDER_ORDER_ID_NOT_EMPTY = "order id not allowed to be empty";
         String TPL_ORDER_TPL_CODE_NOT_EMPTY = "tpl code not allowed to be empty";
         String TPL_ORDER_NOT_FOUND = "tpl order not found";
+        String TPL_ORDER_HAS_NOT_REGISTERED = "This tplOrder has not registered yet";
     }
     public interface courierManager {
         String COURIER_HAS_NOT_IMPL = "Courier has not implemented yet!";

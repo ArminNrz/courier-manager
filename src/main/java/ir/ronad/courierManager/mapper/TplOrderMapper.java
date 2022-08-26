@@ -7,6 +7,7 @@ import ir.ronad.courierManager.dto.tplOrder.TplOrderDTO;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderLimitDTO;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderUpdateRequestDTO;
 import ir.ronad.courierManager.service.data.DeliveryResponse;
+import ir.ronad.courierManager.service.data.GetOrderData;
 import ir.ronad.courierManager.service.data.TplOrderLogData;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -35,4 +36,6 @@ public interface TplOrderMapper {
     @Mapping(source = "deliveryResponse.extraInfo", target = "extraInfo")
     @Mapping(source = "deliveryResponse.tplTrackingCode", target = "tplTrackingCode")
     TplOrderEntity fromDeliveryResponse(DeliveryResponse deliveryResponse, @MappingTarget TplOrderEntity entity);
+
+    GetOrderData toGetOrderData(TplOrderEntity tplOrder);
 }

@@ -7,7 +7,7 @@ import ir.ronad.courierManager.common.ErrorKey;
 import ir.ronad.courierManager.common.ErrorMessages;
 import ir.ronad.courierManager.common.errors.BadRequestAlertException;
 import ir.ronad.courierManager.common.errors.ServiceException;
-import ir.ronad.courierManager.dto.thirdparty.linkExpress.LinkExpressErrorResponse;
+import ir.ronad.courierManager.dto.thirdparty.linkExpress.create.LinkExpressErrorResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

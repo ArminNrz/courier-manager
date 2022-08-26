@@ -10,8 +10,8 @@ public class ErrorKey {
         String INTERNAL_ERROR = "internal.exception";
     }
     public interface tplOrderValidation {
-        String TPL_ORDER_ID_AND_ORDER_ID_NOT_EMPTY = "idOrOrderId.tplOrder.null";
         String TPL_ORDER_NOT_FOUND = "tplOrder.notFound";
+        String TPL_ORDER_HAS_NOT_REGISTERED = "tplOrder.id.hasNotRegistered";
     }
     public interface courierManager {
         String COURIER_HAS_NOT_IMPL = "Courier.notImpl";

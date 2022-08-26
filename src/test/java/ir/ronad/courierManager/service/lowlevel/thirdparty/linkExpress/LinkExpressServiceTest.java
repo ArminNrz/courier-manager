@@ -2,8 +2,8 @@ package ir.ronad.courierManager.service.lowlevel.thirdparty.linkExpress;
 
 import ir.ronad.courierManager.common.ErrorKey;
 import ir.ronad.courierManager.common.errors.BadRequestAlertException;
-import ir.ronad.courierManager.dto.thirdparty.linkExpress.LinkExpressCreateOrderRequest;
-import ir.ronad.courierManager.dto.thirdparty.linkExpress.LinkExpressCreateOrderResponse;
+import ir.ronad.courierManager.dto.thirdparty.linkExpress.create.LinkExpressCreateOrderRequest;
+import ir.ronad.courierManager.dto.thirdparty.linkExpress.create.LinkExpressCreateOrderResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,6 +56,7 @@ class LinkExpressServiceTest {
         LinkExpressCreateOrderResponse actualResponse = linkExpressService.createOrder(createOrderRequest);
         Assertions.assertNotNull(actualResponse);
         Assertions.assertNotNull(actualResponse.getCode());
+        Assertions.assertNotNull(actualResponse.getTracking_code());
     }
 
     @Test

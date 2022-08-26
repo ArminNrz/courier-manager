@@ -29,6 +29,5 @@ public class TplOrderLogEntity extends BaseDomainEntity {
 
     private Long orderId;
 
-    @Indexed(name = "tpl_order_uuid")
     private String tplOrderUUID;
 }

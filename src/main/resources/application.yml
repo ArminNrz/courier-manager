@@ -24,7 +24,7 @@ mongock:
 logging:
   level:
       ir:
-        ronad: debug
+        ronad: trace
 
 ronad:
   security:

@@ -1,4 +1,4 @@
-package ir.ronad.courierManager.dto.thirdparty.linkExpress;
+package ir.ronad.courierManager.dto.thirdparty.linkExpress.create;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.ronad.courierManager.domain.TplOrderEntity;
