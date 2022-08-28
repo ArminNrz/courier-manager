@@ -6,7 +6,7 @@ import ir.ronad.courierManager.common.ErrorKey;
 import ir.ronad.courierManager.common.ErrorMessages;
 import ir.ronad.courierManager.common.errors.NotFoundException;
 import ir.ronad.courierManager.dto.tplOrder.*;
-import ir.ronad.courierManager.service.entity.TplOrderService;
+import ir.ronad.courierManager.service.entity.tplOrder.TplOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

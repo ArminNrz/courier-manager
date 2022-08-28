@@ -42,6 +42,11 @@ ronad:
       exposed-headers: 'Authorization,Link,X-Total-Count'
       allow-credentials: true
       max-age: 1800
+  scheduling:
+    enable: true
+    fixed-delay: 120000
+    initial-delay: 400000
+    page-size: 2
   courier:
     link-express:
       url: http://api.linkexpress.ir/v1

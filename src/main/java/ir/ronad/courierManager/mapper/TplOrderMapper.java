@@ -2,6 +2,7 @@ package ir.ronad.courierManager.mapper;
 
 import ir.ronad.courierManager.domain.TplOrderEntity;
 import ir.ronad.courierManager.domain.TplOrderLogEntity;
+import ir.ronad.courierManager.domain.TplOrderSchedulerEntity;
 import ir.ronad.courierManager.dto.commonEvent.event.entity.TplOrderEvent;
 import ir.ronad.courierManager.dto.commonEvent.event.entity.tplorder.TplOrderDetail;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderCreateRequestDTO;
@@ -50,4 +51,10 @@ public interface TplOrderMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "status", target = "status")
     TplOrderDetail toEventDetails(TplOrderEntity entity);
+
+    @Mapping(source = "entity", target = "tplOrder")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
+    TplOrderSchedulerEntity toScheduler(TplOrderEntity entity);
 }

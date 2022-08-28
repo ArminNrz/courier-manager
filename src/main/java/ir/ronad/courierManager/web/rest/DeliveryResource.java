@@ -2,7 +2,7 @@ package ir.ronad.courierManager.web.rest;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderLimitDTO;
-import ir.ronad.courierManager.service.higlevel.DeliveryService;
+import ir.ronad.courierManager.service.higlevel.delivery.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

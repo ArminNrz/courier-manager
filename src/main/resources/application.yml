@@ -61,6 +61,11 @@ ronad:
       3pl-order:
         topic: event_3pl_order
         partitions: 2
+  scheduling:
+    enable: true
+    fixed-delay: 120000
+    initial-delay: 400000
+    page-size: 2
   courier:
     link-express:
       url: http://api.linkexpress.ir/v1
