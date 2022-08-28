@@ -23,7 +23,7 @@ public class TplOrderSchedulingHandler {
         if (pageCount == 0)
             return;
 
-        IntStream.range(0, pageCount - 1).forEach(this::process);
+        IntStream.range(0, pageCount).forEach(this::process);
     }
 
     private void process(int pageNumber) {
