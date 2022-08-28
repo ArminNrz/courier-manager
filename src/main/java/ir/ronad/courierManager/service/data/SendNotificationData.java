@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class SendNotificationData {
     private String tplOrderId;
-    private String orderId;
+    private Long orderId;
     private TplOrderStatus lastStatus;
     private TplOrderStatus newStatus;
     private List<TplOrderEntity> otherTplOrderEntities;

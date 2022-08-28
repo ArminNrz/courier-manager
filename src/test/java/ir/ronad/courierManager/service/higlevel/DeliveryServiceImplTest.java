@@ -4,15 +4,18 @@ import ir.ronad.courierManager.common.ErrorMessages;
 import ir.ronad.courierManager.common.errors.NotFoundException;
 import ir.ronad.courierManager.domain.TplOrderEntity;
 import ir.ronad.courierManager.domain.TplOrderLogEntity;
+import ir.ronad.courierManager.domain.TplOrderSchedulerEntity;
 import ir.ronad.courierManager.domain.enumartion.NotificationType;
 import ir.ronad.courierManager.domain.enumartion.TplOrderStatus;
 import ir.ronad.courierManager.domain.extraInfo.LinkExpressExtraInfo;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderLimitDTO;
 import ir.ronad.courierManager.repository.TplOrderEntityRepository;
 import ir.ronad.courierManager.repository.TplOrderLogEntityRepository;
+import ir.ronad.courierManager.repository.TplOrderSchedulerEntityRepository;
 import ir.ronad.courierManager.service.data.DeliveryResponse;
-import ir.ronad.courierManager.service.higlevel.manager.CourierManager;
-import ir.ronad.courierManager.utility.BuildTplOrderUtility;
+import ir.ronad.courierManager.service.higlevel.delivery.DeliveryService;
+import ir.ronad.courierManager.service.higlevel.delivery.manager.CourierManager;
+import ir.ronad.courierManager.utility.TplOrderUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest
@@ -30,13 +34,15 @@ import java.util.UUID;
 class DeliveryServiceImplTest {
 
     @Autowired
-    BuildTplOrderUtility buildTplOrderUtility;
+    TplOrderUtility tplOrderUtility;
     @Autowired
     TplOrderEntityRepository tplOrderEntityRepository;
     @Autowired
     DeliveryService deliveryService;
     @Autowired
     TplOrderLogEntityRepository logEntityRepository;
+    @Autowired
+    TplOrderSchedulerEntityRepository schedulerRepository;
     @MockBean
     CourierManager courierManager;
 
@@ -47,7 +53,7 @@ class DeliveryServiceImplTest {
 
     private TplOrderLimitDTO createTplOrder(String message) {
         log.debug("start registering");
-        this.tplOrder = buildTplOrderUtility.buildLinkExpressTplOrder();
+        this.tplOrder = tplOrderUtility.buildLinkExpressTplOrder();
         tplOrderEntityRepository.insert(tplOrder);
         LinkExpressExtraInfo extraInfo = LinkExpressExtraInfo.builder()
                 .message(message)
@@ -151,6 +157,9 @@ class DeliveryServiceImplTest {
         Assertions.assertEquals(TplOrderStatus.REGISTERED_IN_3PL, logEntities.get(0).getNewStatus());
         Assertions.assertEquals(TplOrderStatus.NOT_REGISTERED, logEntities.get(0).getLastStatus());
 
+        Optional<TplOrderSchedulerEntity> schedulerEntity = schedulerRepository.findByTplOrder(tplOrder);
+        Assertions.assertTrue(schedulerEntity.isPresent());
+
         log.debug("Second fetching from courier");
         actualResponse = getTplOrderLimitDTO(TplOrderStatus.DELIVERED_TO_3PL);
         Assertions.assertNotNull(actualResponse);
@@ -163,6 +172,9 @@ class DeliveryServiceImplTest {
         Assertions.assertEquals(TplOrderStatus.DELIVERED_TO_3PL, logEntities.get(1).getNewStatus());
         Assertions.assertEquals(TplOrderStatus.REGISTERED_IN_3PL, logEntities.get(1).getLastStatus());
 
+        Optional<TplOrderSchedulerEntity> schedulerEntityAfterDELIVEREDTo3pl = schedulerRepository.findByTplOrder(tplOrder);
+        Assertions.assertTrue(schedulerEntityAfterDELIVEREDTo3pl.isPresent());
+
         log.debug("Third fetching from courier");
         actualResponse = getTplOrderLimitDTO(TplOrderStatus.DELIVERED);
         Assertions.assertNotNull(actualResponse);
@@ -174,6 +186,9 @@ class DeliveryServiceImplTest {
         Assertions.assertEquals(3, logEntities.size());
         Assertions.assertEquals(TplOrderStatus.DELIVERED, logEntities.get(2).getNewStatus());
         Assertions.assertEquals(TplOrderStatus.DELIVERED_TO_3PL, logEntities.get(2).getLastStatus());
+
+        Optional<TplOrderSchedulerEntity> schedulerEntityAfterDelivered = schedulerRepository.findByTplOrder(tplOrder);
+        Assertions.assertTrue(schedulerEntityAfterDelivered.isEmpty());
     }
 
     @Test

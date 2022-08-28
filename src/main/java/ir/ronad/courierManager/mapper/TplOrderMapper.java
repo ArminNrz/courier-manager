@@ -2,12 +2,15 @@ package ir.ronad.courierManager.mapper;
 
 import ir.ronad.courierManager.domain.TplOrderEntity;
 import ir.ronad.courierManager.domain.TplOrderLogEntity;
+import ir.ronad.courierManager.domain.TplOrderSchedulerEntity;
+import ir.ronad.courierManager.dto.commonEvent.event.entity.TplOrderEvent;
+import ir.ronad.courierManager.dto.commonEvent.event.entity.tplorder.TplOrderDetail;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderCreateRequestDTO;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderDTO;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderLimitDTO;
 import ir.ronad.courierManager.dto.tplOrder.TplOrderUpdateRequestDTO;
 import ir.ronad.courierManager.service.data.DeliveryResponse;
-import ir.ronad.courierManager.service.data.GetOrderData;
+import ir.ronad.courierManager.service.data.SendNotificationData;
 import ir.ronad.courierManager.service.data.TplOrderLogData;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -37,5 +40,21 @@ public interface TplOrderMapper {
     @Mapping(source = "deliveryResponse.tplTrackingCode", target = "tplTrackingCode")
     TplOrderEntity fromDeliveryResponse(DeliveryResponse deliveryResponse, @MappingTarget TplOrderEntity entity);
 
-    GetOrderData toGetOrderData(TplOrderEntity tplOrder);
+    @Mapping(source = "orderId", target = "id")
+    @Mapping(source = "orderId", target = "orderId")
+    @Mapping(source = "tplOrderId", target = "tplOrderId")
+    @Mapping(source = "tplOrderUUID", target = "tplOrderUUID")
+    @Mapping(source = "lastStatus", target = "lastStatus")
+    @Mapping(source = "newStatus", target = "newStatus")
+    TplOrderEvent toEvent(SendNotificationData notificationData);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "status", target = "status")
+    TplOrderDetail toEventDetails(TplOrderEntity entity);
+
+    @Mapping(source = "entity", target = "tplOrder")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "updated", ignore = true)
+    TplOrderSchedulerEntity toScheduler(TplOrderEntity entity);
 }
