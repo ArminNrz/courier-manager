@@ -1,17 +1,10 @@
 package ir.ronad.courierManager.service.lowlevel.producer;
 
-import ir.ronad.courierManager.dto.commonEvent.event.entity.EntityEventType;
-import ir.ronad.courierManager.dto.commonEvent.event.entity.TplOrderEvent;
-import ir.ronad.courierManager.dto.commonEvent.event.entity.tplorder.TplOrderDetail;
 import ir.ronad.courierManager.mapper.TplOrderMapper;
 import ir.ronad.courierManager.service.data.SendNotificationData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -24,6 +17,7 @@ public class TplOrderNotificationService {
     public void sendToBus(SendNotificationData notificationData) {
         log.trace("Enter: TplOrderNotificationService.sendToBus({})", notificationData);
 
+        /*
         TplOrderEvent event = buildEventDTO(notificationData);
 
         try {
@@ -34,8 +28,11 @@ public class TplOrderNotificationService {
             log.error("There is an error in sending orderEvent with id: {}", event.getOrderId());
             e.printStackTrace();
         }
+
+         */
     }
 
+    /*
     private TplOrderEvent buildEventDTO(SendNotificationData notificationData) {
         log.trace("Enter: TplOrderNotificationService.buildEventDTO({})", notificationData);
         List<TplOrderDetail> eventDetails = notificationData.getOtherTplOrderEntities().stream()
@@ -49,4 +46,6 @@ public class TplOrderNotificationService {
         log.trace("Exit: TplOrderNotificationService.buildEventDTO : TplOrderEvent: {}", event);
         return event;
     }
+
+     */
 }
